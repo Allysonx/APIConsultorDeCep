@@ -6,6 +6,12 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <p>Bem Vindo à <%= title %></p>
   </body>
+
+  <form method="GET" action="/api/v1/cep">
+    <input type="text" name="code" placeholder="CEP" required />
+    <button>Consultar CEP</button>
+  </form>
+
 </html>
