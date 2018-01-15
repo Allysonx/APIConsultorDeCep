@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const validator = require('../app/Validator.js');
+const response = require('../app/Response.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,15 +11,20 @@ router.get('/', function(req, res, next) {
 
 router.get('/api/v1/cep', function(req, res){
 
-  let result = validator.validateCep(req.query.code);
+  let resultValidateCep = validator.validateCep(req.query.code);
 
-  if(result){
+  if(resultValidateCep){
+    
     console.log("CEP Válido");
+    response.consultCep(req.query.code)
+      .then(cepJson => res.send(cepJson))
+      .catch(error => res.send(error.message));
+
   } else {
     console.log("CEP Inválido");
+    res.send(response.createResponseError());
   }
 
-  res.render('test', { title: "Página Teste", cep: req.query.code});
 });
 
 module.exports = router;
