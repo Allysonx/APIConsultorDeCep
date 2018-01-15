@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const util = require('../app/Util.js');
+const validator = require('../app/Validator.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/api/v1/cep', function(req, res){
 
-  let result = util.validateCep(req.query.code);
+  let result = validator.validateCep(req.query.code);
 
   if(result){
     console.log("CEP Válido");
